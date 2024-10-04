@@ -5,3 +5,5 @@ RUN g++ -o myapp -std=c++20 -lpqxx -lpq -lspdlog -lfmt main.cpp
 CMD ["./myapp"]
 
 # TODO add install of required libraries: redis-plus-plus, spdlog, fmt, psqlxx...
+
+# TODO Integrate cmake

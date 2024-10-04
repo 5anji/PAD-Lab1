@@ -21,8 +21,7 @@ inline constexpr auto port = 5432;
 inline constexpr auto redis_host = "127.0.0.1";
 inline constexpr auto redis_port = 6379;
 
-inline constexpr int max_concurrent_tasks = 10;
-std::counting_semaphore<max_concurrent_tasks> task_semaphore(max_concurrent_tasks);
+inline constexpr auto http_port = 8080;
 
 // Function to convert PostgreSQL array to std::vector<std::string>
 std::vector<std::string> parse_array(pqxx::field const& field) {
@@ -117,7 +116,7 @@ int main() {
                     auto config_id = result[0][0].as<int>();
 
                     // Generate a response
-                    json response = {{"configId", std::to_string(config_id)},
+                    json response = {{"configId", config_id},
                                      {"message", "Configuration saved successfully."}};
                     return crow::response{response.dump()};
                 });
@@ -143,7 +142,7 @@ int main() {
 
                         auto row = res[0];
 
-                        nlohmann::json json;
+                        json json;
                         // Retrieve data from the row and populate the JSON object
                         json["config_id"] = row["config_id"].as<int>();
                         json["engine"] = row["engine"].as<std::string>();
@@ -163,7 +162,7 @@ int main() {
                 });
 
         // Start the HTTP server
-        app.port(8080).multithreaded().run();
+        app.port(http_port).multithreaded().run();
 
     } catch (std::exception const& e) {
         spdlog::error("Exception: {}", e.what());
