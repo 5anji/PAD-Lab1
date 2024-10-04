@@ -27,6 +27,12 @@ services:
     networks:
       - app-network
 
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"  # Expose Redis on port 6379
+    networks:
+      - app-network
 volumes:
   config_db_data:
   factory_db_data:

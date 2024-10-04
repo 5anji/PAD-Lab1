@@ -44,7 +44,7 @@ IncludeCategories:
   - Regex:           '^".+"$'
     Priority:        1
 # 3rd
-  - Regex:           '^<(pqxx|fmt|spdlog)/'
+  - Regex:           '^<(pqxx|fmt|spdlog|sw|nlohmann)/'
     Priority:        2
 # boost
   - Regex:           '^<boost/'
